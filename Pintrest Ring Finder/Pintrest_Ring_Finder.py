@@ -35,7 +35,9 @@ def menu_function():
             5. Print Key words to find
             6. wipe Key words to find
             7. Print Websites
-            8. Run the Tool!"""))
+            8. Run the Tool with Keywords
+            9. Run the took for every word
+            10. Exit """))
     if menu == "1":
       print("running 1")
       addsite_function()
@@ -44,8 +46,10 @@ def menu_function():
       printlist_function()
     elif menu == "3":
       print("Runing 3")
+      wipelist_function()
     elif menu == "4":
       print("Runing 4")
+      addkeyword_function()
     elif menu == "5":
       print("Runing 5")
     elif menu == "6":
@@ -71,6 +75,15 @@ def printlist_function():
 def wipelist_function():
     with open("urls.txt", "r+") as urlfile:
         urlfile.truncate(0)
+    menu_function()
+
+def addkeyword_function():
+    keyword = input("Enter a keyword")
+    with open("keywords.txt", "a") as keywords:
+        keywords.write('\n')
+        keywords.write(keyword)
+    print("added")
+    menu_function()
 
 '''
  
