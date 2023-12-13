@@ -9,12 +9,7 @@ import numpy as np
 #variables 
 cnt = Counter()
 
- 
-
-
 #menu
-
-
 def menu_function():
     menu = input(print("""What would you Like to do? 
             1. Add 1 or more websites to list
@@ -49,6 +44,7 @@ def menu_function():
       Findkeywords_function()
     elif menu == "8":
       print("Runing 8")
+      Findallwords_function()
     elif menu == "9":
       print("Runing 9")
     elif menu == "10":
@@ -95,7 +91,7 @@ def wipekeywords_function():
         keywords.truncate(0)
     menu_function()
     
-def Findkeywords_function():
+def Findallwords_function():
     #import as list
     websites = open("urls.txt", "r").read()
     websitelist = websites.split("\n") 
@@ -107,7 +103,7 @@ def Findkeywords_function():
        site = requests.get(url)
        soup = BeautifulSoup(site.content, "html.parser")
        #remove trash data
-       [s.extract() for s in soup(['style', 'script', '[document]', 'head', 'title', "@", "html"])]
+       [s.extract() for s in soup(['style', 'script', '[document]', 'head', 'title'])]
        #find all text 
        words = soup.findAll(text=True)
        #start a cound for all text found in "words"
@@ -117,7 +113,34 @@ def Findkeywords_function():
        cnt.update(a.most_common(50))
     findings_function()
     menu_function()
-  
+    
+def Findkeywords_function():
+   #import as list
+    websites = open("urls.txt", "r").read()
+    websitelist = websites.split("\n") 
+    print(websitelist)
+   #import as list
+    websites = open("keywords.txt", "r").read()
+    keywords = websites.split("\n") 
+    print(keywords)
+    #after coverted to List go through each and count
+    for url in websitelist:
+       print(url)
+       #search sites
+       site = requests.get(url)
+       soup = BeautifulSoup(site.content,)
+       #remove trash data
+       [s.extract() for s in soup(['style', 'script', '[document]', 'head', 'title'])]
+       #find all text 
+       words = soup.findAll(text=True)
+       #Find values in common and print them
+       matches = list(set(keywords) & set(words))
+       print("I found the following Matches", 'red')
+       for match in matches:
+        print(match)
+ #   findings_function()
+    menu_function()
+    
 def findings_function():
    #displays the data
    makeaframe = pd.DataFrame(cnt.most_common(50))
@@ -125,16 +148,5 @@ def findings_function():
    print(makeaframe)
    #sets everthing back to 0
    a = 0
-
-  
-
- #   with open('urls.txt') as urls:
- #      url = urls.txt.read().splitlines()
- #   soup = BeautifulSoup(url.content)
- #   [s.extract() for s in soup(['style', 'script', '[document]', 'head', 'title'])]
- #   texts = soup.findAll(text=True)
- #   exclusion_list = 'up 3 5 7 9'.split()
- #   a = Counter([x.lower() for y in texts for x in y.split()])
- #   cnt.update(a.most_common(50))
 
 menu_function()

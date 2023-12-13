@@ -1,3 +1,1 @@
-https://Google.com
-https://youtube.com
-https://bing.com
+https://google.com
