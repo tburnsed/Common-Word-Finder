@@ -87,54 +87,6 @@ def addkeyword_function():
 
 '''
  
-
-websites = [
-             'https://www.pinterest.com/pin/495888608981206761/?mt=login',
-             'https://www.pinterest.com/pin/495888608981201114/',
-             'https://www.pinterest.com/pin/495888608981047497/',
-             'https://www.pinterest.com/pin/495888608981047433/',
-             'https://www.pinterest.com/pin/495888608981045976/',
-             'https://www.pinterest.com/pin/495888608980613712/',
-             'https://www.pinterest.com/pin/495888608980569223/',
-             'https://www.pinterest.com/pin/495888608980569227/',
-             'https://www.pinterest.com/pin/495888608980569170/',
-             'https://www.pinterest.com/pin/495888608980540049/',
-             'https://www.pinterest.com/pin/pear-shaped-morganite-engagement-ring-set-rose-gold-art-deco--495888608980519686/',
-             'https://www.pinterest.com/pin/495888608980515607/',
-             'https://www.pinterest.com/pin/495888608980515490/',
-             'https://www.pinterest.com/pin/495888608980470566/',
-             'https://www.pinterest.com/pin/495888608980518981/',
-             'https://www.pinterest.com/pin/495888608980479765/',
-             'https://www.pinterest.com/pin/495888608980470909/',
-             'https://www.pinterest.com/pin/495888608980356018/',
-             'https://www.pinterest.com/pin/495888608980318779/',
-             'https://www.pinterest.com/pin/495888608980313828/',
-             'https://www.pinterest.com/pin/495888608980405803/',
-             'https://www.pinterest.com/pin/495888608980305845/',
-             'https://www.pinterest.com/pin/495888608980312917/',
-             'https://www.pinterest.com/pin/495888608980302592/',
-             'https://www.pinterest.com/pin/495888608980305816/',
-             'https://www.pinterest.com/pin/495888608980304284/',
-             'https://www.pinterest.com/pin/495888608980304343/',
-             'https://www.pinterest.com/pin/495888608980282281/',
-             'https://www.pinterest.com/pin/leandra-mint-sapphire-engagement-ring-with-diamond-clusters-in-2022--495888608980250145/',
-             'https://www.pinterest.com/pin/495888608980287295/',
-             'https://www.pinterest.com/pin/495888608980282301/',
-             'https://www.pinterest.com/pin/495888608980287633/',
-             'https://www.pinterest.com/pin/495888608980287637/',
-             'https://www.pinterest.com/pin/495888608980296814/',
-             'https://www.pinterest.com/pin/495888608980109885/',
-             'https://www.pinterest.com/pin/495888608980162996/',
-             'https://www.pinterest.com/pin/495888608980224245/',
-             'https://www.pinterest.com/pin/495888608977140982/',
-             'https://www.pinterest.com/pin/495888608971402561/',
-             'https://www.pinterest.com/pin/495888608978395085/',
-             'https://www.pinterest.com/pin/495888608978386632/',
-             'https://www.pinterest.com/pin/495888608978174676/',
-             'https://www.pinterest.com/pin/495888608978070525/',
-             'https://www.pinterest.com/pin/495888608978520227/',
-             'https://www.pinterest.com/pin/495888608978270190/'
-              ]
 #print(websites2)
 for url in websites:
  GetData(url)
