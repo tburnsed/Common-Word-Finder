@@ -9,8 +9,6 @@ import numpy as np
 #variables 
 cnt = Counter()
 
-def GetData(url):
-
  
 
 
@@ -48,6 +46,7 @@ def menu_function():
       wipekeywords_function()
     elif menu == "7":
       print("Runing 7")
+      Findkeywords_function()
     elif menu == "8":
       print("Runing 8")
     elif menu == "9":
@@ -97,26 +96,45 @@ def wipekeywords_function():
     menu_function()
     
 def Findkeywords_function():
- Website1 = requests.get(url)
- soup = BeautifulSoup(Website1.content)
- [s.extract() for s in soup(['style', 'script', '[document]', 'head', 'title'])]
- #visible_text = soup.getText()
- texts = soup.findAll(text=True)
+    #import as list
+    websites = open("urls.txt", "r").read()
+    websitelist = websites.split("\n") 
+    print(websitelist)
+    #after coverted to List go through each and count
+    for url in websitelist:
+       print(url)
+       #search sites
+       site = requests.get(url)
+       soup = BeautifulSoup(site.content, "html.parser")
+       #remove trash data
+       [s.extract() for s in soup(['style', 'script', '[document]', 'head', 'title', "@", "html"])]
+       #find all text 
+       words = soup.findAll(text=True)
+       #start a cound for all text found in "words"
+       a = Counter([x.lower() for y in words for x in y.split()])
+       #store the counts in this variable
+       #need to find out how to reset this after dispalying data
+       cnt.update(a.most_common(50))
+    findings_function()
+    menu_function()
+  
+def findings_function():
+   #displays the data
+   makeaframe = pd.DataFrame(cnt.most_common(50))
+   makeaframe.columns = ['Words', 'Frequency']
+   print(makeaframe)
+   #sets everthing back to 0
+   a = 0
 
- exclusion_list = 'up 3 5 7 9'.split()
- 
- a = Counter([x.lower() for y in texts for x in y.split()])
- cnt.update(a.most_common(50))
+  
 
-'''
- 
-#print(websites2)
-for url in websites:
- GetData(url)
-
-makeaframe = pd.DataFrame(cnt.most_common(50))
-makeaframe.columns = ['Words', 'Frequency']
-print(makeaframe)
-'''
+ #   with open('urls.txt') as urls:
+ #      url = urls.txt.read().splitlines()
+ #   soup = BeautifulSoup(url.content)
+ #   [s.extract() for s in soup(['style', 'script', '[document]', 'head', 'title'])]
+ #   texts = soup.findAll(text=True)
+ #   exclusion_list = 'up 3 5 7 9'.split()
+ #   a = Counter([x.lower() for y in texts for x in y.split()])
+ #   cnt.update(a.most_common(50))
 
 menu_function()
