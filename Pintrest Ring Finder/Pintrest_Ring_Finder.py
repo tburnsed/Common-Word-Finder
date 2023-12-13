@@ -6,6 +6,7 @@ from collections import Counter
 import pandas as pd
 import numpy as np
 
+
 #variables 
 cnt = Counter()
 
@@ -22,36 +23,29 @@ def menu_function():
             8. Run the took for every word
             10. Exit """))
     if menu == "1":
-      print("running 1")
       addsite_function()
     elif menu == "2":
-      print("Runing 2")
       printlist_function()
     elif menu == "3":
-      print("Runing 3")
       wipelist_function()
     elif menu == "4":
-      print("Runing 4")
       addkeyword_function()
     elif menu == "5":
-      print("Runing 5")
       printkeywords_function()
     elif menu == "6":
-      print("Runing 6")
       wipekeywords_function()
     elif menu == "7":
-      print("Runing 7")
       Findkeywords_function()
     elif menu == "8":
-      print("Runing 8")
       Findallwords_function()
     elif menu == "9":
-      print("Runing 9")
+       zzzzzzzzzzz()
     elif menu == "10":
       quit()
     else:
       print("Not a Valid Choice")
       menu_function()
+    
 
 def addsite_function():
     site = input("Enter URL")
@@ -63,8 +57,13 @@ def addsite_function():
     
 def printlist_function():
     with open("urls.txt", "r") as urlfile:
-        sites = urlfile.read()
-        print(sites)
+        sites = urlfile.read()       
+        if not sites:
+           spaceing_function()
+           print("List is empty!!")
+           spaceing_function()
+        else:
+           print(sites)
     menu_function()
 
 def wipelist_function():
@@ -148,5 +147,9 @@ def findings_function():
    print(makeaframe)
    #sets everthing back to 0
    a = 0
+   
+def spaceing_function():
+    print("=========================")
+    
 
 menu_function()
