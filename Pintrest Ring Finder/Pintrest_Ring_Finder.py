@@ -118,21 +118,27 @@ def wipekeywords_function():
     
 def Findallwords_function():
     #import as list
-    try:
-        websites = open("urls.txt", "r").read()
-        websitelist = websites.split("\n") 
-    except:
-       print("error")
+    websites = open("urls.txt", "r").read()
+    websitelist = websites.split("\n") 
     #Loop through to display sites that are being indexed
-    print("Searching These sites....")
+    spaceing_function("Searching These sites....")
     for url in websitelist:
        print(url)
     #after coverted to List go through each and count
     for url in websitelist:
-       #search sites
-       site = requests.get(url)
-       soup = BeautifulSoup(site.content, "html.parser")
-       [s.extract() for s in soup(['style', 'script', '[document]', 'head', 'title'])]
+       #search sites in loop catch error for websites that wont connect
+       try:
+            err1 = 0
+            site = requests.get(url)
+            soup = BeautifulSoup(site.content, "html.parser")
+            [s.extract() for s in soup(['style', 'script', '[document]', 'head', 'title'])]
+       except:
+            err1 = 1
+       #if error is found prints out what website it could not connect to
+       if err1 == 1:
+          print("error connecting to " + url)
+       else:
+          pass
        #find all text 
        words = soup.findAll(text=True)
        #counts for all text found in "words"
