@@ -9,6 +9,7 @@ import numpy as np
 
 #variables 
 cnt = Counter()
+all_words = []
 
 #menu
 def menu_function():
@@ -120,10 +121,12 @@ def Findallwords_function():
     #import as list
     websites = open("urls.txt", "r").read()
     websitelist = websites.split("\n") 
+    
     #Loop through to display sites that are being indexed
     spaceing_function("Searching These sites....")
     for url in websitelist:
        print(url)
+       
     #after coverted to List go through each and count
     for url in websitelist:
        #search sites in loop catch error for websites that wont connect
@@ -139,6 +142,7 @@ def Findallwords_function():
           print("error connecting to " + url)
        else:
           pass
+       
        #find all text 
        words = soup.findAll(text=True)
        #counts for all text found in "words"
@@ -155,8 +159,10 @@ def Findkeywords_function():
     websitelist = websites.split("\n") 
     #Loop through to display sites that are being indexed
     print("Searching These sites....")
+    
     for url in websitelist:
        print(url)
+       
     #import as list
     keywords = open("keywords.txt", "r").read()
     keywordlist = keywords.split("\n") 
@@ -164,24 +170,30 @@ def Findkeywords_function():
     print("Searching for these keywords....")
     for word in keywordlist:
        print(word)
+       
     #after coverted to List go through each and count
     for url in websitelist:
-
-       #search sites
-
-       site = requests.get(url)
-       soup = BeautifulSoup(site.content,"html.parser")
-       #remove trash data
-       [s.extract() for s in soup(['style', 'script', '[document]', 'head', 'title'])]
+       #search sites in loop catch error for websites that wont connect
+       try:
+            err1 = 0
+            site = requests.get(url)
+            soup = BeautifulSoup(site.content, "html.parser")
+            [s.extract() for s in soup(['style', 'script', '[document]', 'head', 'title'])]
+       except:
+            err1 = 1
+       #if error is found prints out what website it could not connect to
+       if err1 == 1:
+          print("error connecting to " + url)
+       else:
+          pass
+       
        #find all text 
        words = soup.findAll(text=True)
-       #Find values in common and print them
-       print(words)
-       matches = list(set(keywords) & set(words))
-       spaceing_function("I found the following Matches.....")
-       for match in matches:
-        print(match)
- #   findings_function()
+       
+       #Add text to masterlist
+       all_words.append(words)
+   
+    keywordfindings_function()
     menu_function()
     
 def findings_function():
@@ -191,6 +203,16 @@ def findings_function():
    print(makeaframe)
    #sets everthing back to 0
    cnt.update(Counter({'y': 0, 'x': 0}))
+   
+def keywordfindings_function():
+    #print("all words")
+    #print(all_words)
+    keywords = open("keywords.txt", "r").read()
+    keywordlist = keywords.split("\n") 
+    spaceing_function("I found the following Matches.....")
+    matches = list(frozenset(keywordlist) & frozenset(all_words))
+    for match in matches:
+        print(match)
    
 def spaceing_function(message):
       print("")  
